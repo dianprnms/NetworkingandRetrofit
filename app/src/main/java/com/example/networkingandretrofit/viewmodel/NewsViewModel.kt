@@ -7,6 +7,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.networkingandretrofit.model.*
 import com.example.networkingandretrofit.network.RetrofitClient
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -16,11 +18,13 @@ class NewsViewModel : ViewModel() {
     lateinit var liveDataNews: MutableLiveData<List<ResponseDataNewsItem>>
     lateinit var postDataNews: MutableLiveData<ResponseAddNews>
     lateinit var updateDataNews: MutableLiveData<List<ResponseUpdateNews>>
+    lateinit var deleteDataNews: MutableLiveData<Int>
 
     init {
         liveDataNews = MutableLiveData()
         postDataNews = MutableLiveData()
         updateDataNews = MutableLiveData()
+        deleteDataNews = MutableLiveData()
     }
 
     fun postNews ():MutableLiveData<ResponseAddNews>{
@@ -30,6 +34,14 @@ class NewsViewModel : ViewModel() {
     fun putNews(): MutableLiveData<List<ResponseUpdateNews>>{
         return updateDataNews
     }
+
+    fun deleteNews():MutableLiveData<Int>{
+        return deleteDataNews
+    }
+
+//    fun getCallApiNews(): MutableLiveData<List<ResponseDataNewsItem>>{
+//        return liveDataNews
+//    }
 
     fun callApiNews() {
         RetrofitClient.instance.getAllNews()
@@ -111,6 +123,30 @@ class NewsViewModel : ViewModel() {
                 }
 
 
+            })
+    }
+//    fun getAllNews() {
+//        GlobalScope.launch {
+//            val userDao = RetrofitClient.in(getApplication())!!.noteDao()
+//            val listnote = userDao.getDataNote()
+//            allNote.postValue(listnote)
+//        }
+//    }
+
+    fun deleteDataNews(id:Int, title: String, image: String, author: String, description: String){
+        RetrofitClient.instance.deleteDataNews(id)
+            .enqueue(object : Callback<Int> {
+
+                override fun onResponse(call: Call<Int>, response: Response<Int>) {
+                    if (response.isSuccessful) {
+                        deleteDataNews.postValue(response.body())
+                    } else {
+                        deleteDataNews.postValue(null)
+                    }                }
+
+                override fun onFailure(call: Call<Int>, t: Throwable) {
+                    deleteDataNews.postValue(null)
+                }
             })
     }
 }

@@ -33,8 +33,17 @@
            android:id="@+id/iconupdate"
            android:src="@drawable/edit"
            android:layout_alignParentRight="true"
+           android:layout_marginTop="20dp"
            android:layout_width="20dp"
            android:layout_height="20dp"/>
+
+        <ImageView
+            android:id="@+id/icondelete"
+            android:src="@drawable/delete"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="50dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"/>
 
     </RelativeLayout>
 

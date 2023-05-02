@@ -1,6 +1,7 @@
 package com.example.networkingandretrofit.model
-import com.google.gson.annotations.SerializedName
 
+
+import com.google.gson.annotations.SerializedName
 data class ResponseDataNewsItem(
     @SerializedName("author")
     val author: String,

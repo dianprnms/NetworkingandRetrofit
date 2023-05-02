@@ -1,13 +1,11 @@
 package com.example.networkingandretrofit
 
-import android.content.ClipData.Item
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.networkingandretrofit.databinding.ItemNewsBinding
-import com.example.networkingandretrofit.model.ResponseDataNews
 import com.example.networkingandretrofit.model.ResponseDataNewsItem
 
 class NewsAdapter(var listNews : List<ResponseDataNewsItem>):RecyclerView.Adapter<NewsAdapter.ViewHolder>() {
@@ -34,9 +32,17 @@ class NewsAdapter(var listNews : List<ResponseDataNewsItem>):RecyclerView.Adapte
             it.context.startActivity(edit)
         }
 
-
-
-
+        holder.binding.icondelete.setOnClickListener{
+            var delete = Intent(it.context, DeleteNewsActivity::class.java)
+            delete.putExtra("delete", listNews[position].id)
+            it.context.startActivity(delete)
+        }
     }
+
+//    fun setNewsData(listNews: ArrayList<ResponseDataNewsItem>)
+//    {
+//        this.listNews=listNews
+//
+//    }
 
 }

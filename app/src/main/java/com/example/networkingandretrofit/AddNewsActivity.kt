@@ -1,9 +1,8 @@
 package com.example.networkingandretrofit
 
-import android.os.Binder
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.networkingandretrofit.databinding.ActivityAddNewsBinding
 import com.example.networkingandretrofit.viewmodel.NewsViewModel
@@ -28,7 +27,7 @@ class AddNewsActivity : AppCompatActivity() {
         val viewModel = ViewModelProvider(this).get(NewsViewModel::class.java)
         viewModel.addDataNews(title, image, author, desc)
         viewModel.postNews().observe(this, {
-            if(it != null){
+                if(it != null){
                 Toast.makeText(this, "Data berhasil ditambahkan", Toast.LENGTH_SHORT).show()
             }
         })
