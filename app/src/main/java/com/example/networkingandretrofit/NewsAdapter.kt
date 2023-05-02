@@ -1,6 +1,7 @@
 package com.example.networkingandretrofit
 
 import android.content.ClipData.Item
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -26,6 +27,12 @@ class NewsAdapter(var listNews : List<ResponseDataNewsItem>):RecyclerView.Adapte
         holder.binding.titleNews.text = listNews[position].title
         holder.binding.datenews.text = listNews[position].createdAt
         Glide.with(holder.itemView).load(listNews[position].image).into(holder.binding.imgNews)
+
+        holder.binding.iconupdate.setOnClickListener {
+            var edit = Intent(it.context, UpdateNewsActivity::class.java)
+            edit.putExtra("update", listNews[position].id)
+            it.context.startActivity(edit)
+        }
     }
 
 }
