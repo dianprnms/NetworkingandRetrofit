@@ -2,6 +2,7 @@ package com.example.networkingandretrofit
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.networkingandretrofit.databinding.ActivityUpdateNewsBinding
@@ -14,8 +15,8 @@ class UpdateNewsActivity : AppCompatActivity() {
         binding = ActivityUpdateNewsBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.Updatebtn.setOnClickListener{
-//            var id = intent.getStringExtra("update")
-            var id = 2
+            var id = intent.getStringExtra("update")
+//            var id = 2
             var title = binding.updateTitle.text.toString()
             var author = binding.updateAuthor.text.toString()
             var image = binding.updateImage.text.toString()
@@ -29,7 +30,7 @@ class UpdateNewsActivity : AppCompatActivity() {
         viewModel.callUpdateDataNews(id, title, image, author, desc)
         viewModel.putNews().observe(this,{
             if (it != null){
-                //message
+                Toast.makeText(this, "Data berhasil diupdate", Toast.LENGTH_SHORT).show()
             }
         })
     }

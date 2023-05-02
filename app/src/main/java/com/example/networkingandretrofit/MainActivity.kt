@@ -1,5 +1,6 @@
 package com.example.networkingandretrofit
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -19,6 +20,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         getDatanews()
+
+        binding.addButton.setOnClickListener{
+            startActivity(Intent(this,AddNewsActivity::class.java))
+        }
     }
 
     fun getDatanews(){

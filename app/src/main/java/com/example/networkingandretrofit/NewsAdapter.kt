@@ -33,6 +33,10 @@ class NewsAdapter(var listNews : List<ResponseDataNewsItem>):RecyclerView.Adapte
             edit.putExtra("update", listNews[position].id)
             it.context.startActivity(edit)
         }
+
+
+
+
     }
 
 }
